@@ -17,6 +17,10 @@ module Terminus
         end
 
         def call(environment) = @application.call environment
+
+        def instrument(_event_id, payload = {})
+          yield payload if block_given?
+        end
       end
     end
   end

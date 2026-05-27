@@ -7,5 +7,7 @@ IFS=$'\n\t'
 
 cd /app
 ./bin/setup
+bundle exec hanami assets compile
+bundle exec hanami db migrate
 
 exec "$@"
