@@ -23,9 +23,11 @@ module Terminus
         optional(:days).maybe :array
         required(:last_day_of_month).filled :bool
         required(:start_at).filled :date_time
+        optional(:on_exchange_error).maybe :string
 
         after(:value_coercer, &Coercers::LinesToArray.curry[:tags])
         after(:value_coercer, &Coercers::DefaultToFalse.curry[:last_day_of_month])
+        after(:value_coercer, &Coercers::DefaultToRender.curry[:on_exchange_error])
         after(:value_coercer, &Coercers::DefaultToArray.curry[:days])
         after(:value_coercer, &Coercers::JSONToHash.curry[:static_body])
         after(:value_coercer, &Coercers::JSONToHash.curry[:fields])

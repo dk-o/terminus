@@ -76,6 +76,16 @@ CREATE TYPE public.extension_kind_enum AS ENUM (
 
 
 --
+-- Name: extension_on_exchange_error_enum; Type: TYPE; Schema: public; Owner: -
+--
+
+CREATE TYPE public.extension_on_exchange_error_enum AS ENUM (
+    'render',
+    'skip'
+);
+
+
+--
 -- Name: extension_unit_enum; Type: TYPE; Schema: public; Owner: -
 --
 
@@ -394,7 +404,8 @@ CREATE TABLE public.extension (
     start_at timestamp without time zone DEFAULT date_trunc('day'::text, CURRENT_TIMESTAMP) NOT NULL,
     created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    mode text DEFAULT 'text'::text NOT NULL
+    mode text DEFAULT 'text'::text NOT NULL,
+    on_exchange_error public.extension_on_exchange_error_enum DEFAULT 'render'::public.extension_on_exchange_error_enum NOT NULL
 );
 
 
@@ -1673,4 +1684,5 @@ INSERT INTO schema_migrations (filename) VALUES
 ('20260508102145_add_device_synced_at_column.rb'),
 ('20260512100558_remove_device_proxy_column.rb'),
 ('20260512102800_remove_extension_poll_columns.rb'),
-('20260512110409_rename_extension_body_column.rb');
+('20260512110409_rename_extension_body_column.rb'),
+('20260528120000_add_extension_on_exchange_error_column.rb');

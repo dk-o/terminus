@@ -125,6 +125,19 @@
         <% end %>
       </div>
 
+      <%= scope(:form_field, key: :on_exchange_error, errors:, alpine: {show: "kind === 'poll'"}).render do %>
+        <%= form.check_box :on_exchange_error,
+                           id: :extension_on_exchange_error,
+                           checked: field_for(:on_exchange_error, fields, extension) == "skip",
+                           value: "skip",
+                           switch: true,
+                           class: :checkbox %>
+
+        <label class="key" for="extension_on_exchange_error">
+          Keep rendered image on exchange query error
+        </label>
+      <% end %>
+
       <%= scope(
             :form_field,
             key: :static_body,
